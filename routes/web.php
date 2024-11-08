@@ -22,9 +22,17 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/',[AuthController::class,'login']);
 
+// Route Login, Logout
 Route::post('login',[AuthController::class,'AuthLogin']);
 Route::get('logout',[AuthController::class,'logout']);
 
+//Route forgot password
+Route::get('forgot-password',[AuthController::class,'forgotpassword']);
+Route::post('forgot-password',[AuthController::class,'PostForgotPassword']);
+
+//Route reset password
+Route::get('reset/{token}',[AuthController::class,'reset']);
+Route::post('reset/{token}',[AuthController::class,'PostReset']);
 
 Route::get('admin/admin/list', function () {
     return view('admin.admin.list');
