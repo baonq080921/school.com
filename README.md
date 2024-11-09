@@ -27,4 +27,7 @@ To be able to access the application it is necessary to follow the following ste
 https://github.com/baonq080921/school.com.git
 
 
+2. Make a copy of the .env.example file and rename it to .env
+
+
 
