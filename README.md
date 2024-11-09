@@ -24,7 +24,7 @@ To be able to access the application it is necessary to follow the following ste
 
 Clone the repository with the following command:
 ```bash
-git clone https://github.com/StephaneKuma/sms.git
+https://github.com/baonq080921/school.com.git
 
 
 
