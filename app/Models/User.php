@@ -62,17 +62,17 @@ class User extends Authenticatable
             $return = $return->whereDate('created_at' ,'=' ,request()->get('date'));
         }
                                 
-        $return = $return -> orderBy('id','desc')
-                        -> paginate(20);
+        $return = $return -> orderBy('id','asc')
+                        -> paginate(10);
         return $return;
     }
     static public function getEmailSingle($email)
     {
-        return User::where('email','=', $email) -> first();
+        return self::where('email','=', $email) -> first();
     }
     static public function getTokenSingle($remember_token)
     {
-        return User::where('remember_token','=', $remember_token) -> first();
+        return self::where('remember_token','=', $remember_token) -> first();
     }
 
     static public function getSingle($id)

@@ -19,7 +19,7 @@ class AdminController extends Controller
 
     public function add()
     {
-        $data['header_title'] = 'Admin New admin';
+        $data['header_title'] = 'Add New admin';
         return view('admin.admin.add',$data);
     }
     public function insert( Request $request)
