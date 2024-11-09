@@ -19,6 +19,11 @@ This SMS is a school management system developed with version 10 of the Laravel 
 
 
 
-# How To Install SMS:
-To be able to access the application it is necessary to follow the following steps:
-    1. Clone the repository with the following command:
+
+### Giải thích
+- `## Truy cập ứng dụng`: Tiêu đề phụ giúp làm rõ nội dung.
+- Sử dụng danh sách có đánh số để hướng dẫn từng bước.
+- Dùng `bash` để đánh dấu lệnh Git, giúp lệnh hiển thị nổi bật và dễ nhìn.
+
+Cách trình bày này giúp người đọc dễ hiểu và thao tác hơn khi xem trên GitHub.
+
