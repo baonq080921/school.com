@@ -22,7 +22,7 @@ This SMS is a school management system developed with version 10 of the Laravel 
 
 To be able to access the application it is necessary to follow the following steps:
 
-Clone the repository with the following command:
+1. Clone the repository with the following command:
 ```bash
 https://github.com/baonq080921/school.com.git
 
