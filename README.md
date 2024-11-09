@@ -48,7 +48,7 @@ DB_PASSWORD=
 ```bash
 https://mailtrap.io/?gad_source=1&gclid=Cj0KCQiArby5BhCDARIsAIJvjIQyU3uY3LEe4c_kAQM19NL7GlGSMYy4Z6RtQFJ1gOMTv0g7EP-p-AwaAr6WEALw_wcB
 ```
-![My Image](images/Screenshot 2024-11-10 at 00.33.42.png)
+![My Image](public/images/Screenshot 2024-11-10 at 00.33.42.png)
 
 5.Install the various application dependencies
 ```bash
