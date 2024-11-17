@@ -101,7 +101,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link" style="text-align: center">
+    <a href="" class="brand-link" style="text-align: center">
       <span class="brand-text font-weight-light" style="font-weight:bold !important; font-size :20px; ">School</span>
     </a>
 
@@ -152,6 +152,15 @@
           <i class="nav-icon far fa-user"></i>
           <p>
             Subject
+          </p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="{{url('admin/assign_subject/list') }}" class="nav-link @if(Request::segment(2)=='assign_subject') active @endif">
+          <i class="nav-icon far fa-user"></i>
+          <p>
+            Assign Subject
           </p>
         </a>
       </li>
