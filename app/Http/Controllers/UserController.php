@@ -18,6 +18,7 @@ class UserController extends Controller
 
     public function update_change_password(Request $request)
     {
+        // dd($request -> all());
         $user = User::getSingle(Auth::user()-> id);
         if(Hash::check($request ->old_password,$user-> password))
         {
