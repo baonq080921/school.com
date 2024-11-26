@@ -58,6 +58,9 @@ class SubjectController extends Controller
 
     public function delete($id)
     {
+        //Find subject $id and delete from database
+        // $save = SubjectModel::findOrFail($id);
+        // $save -> delete();
         $save = SubjectModel::getSingle($id);
         $save -> is_delete = 1;
         $save -> save();

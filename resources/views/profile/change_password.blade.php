@@ -28,7 +28,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label>Old Password</label>
-                    <input type="password" class="form-control" name ="old_password" required placeholder="Old Password">
+                    <input type="text" class="form-control" name ="old_password" required placeholder="Old Password">
                 </div>
 
                 <div class="form-group">
