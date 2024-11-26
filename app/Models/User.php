@@ -66,6 +66,97 @@ class User extends Authenticatable
                         -> paginate(10);
         return $return;
     }
+
+    static public function getStudent($remove_pagination = 0)
+    {
+        $return = self::select('users.*')
+                        -> where('users.user_type','=',3)
+                        -> where('users.is_delete','=',0);
+                        if(!empty(request()->get('name')))
+                        {
+                            $return = $return->where('users.name','like', '%'.request()->get('name').'%');
+                        }
+                        if(!empty(request()->get('last_name')))
+                        {
+                            $return = $return->where('users.last_name','like', '%'.request()->get('last_name').'%');
+                        }
+
+                        if(!empty(request()->get('email')))
+                        {
+                            $return = $return->where('users.email','like', '%'.request()->get('email').'%');
+                        }
+
+                        if(!empty(request()->get('admission_number')))
+                        {
+                            $return = $return->where('users.admission_number','like', '%'.request()->get('admission_number').'%');
+                        }
+
+                        if(!empty(request()->get('roll_number')))
+                        {
+                            $return = $return->where('users.roll_number','like', '%'.request()->get('roll_number').'%');
+                        }
+
+                        if(!empty(request()->get('class')))
+                        {
+                            $return = $return->where('class.name','like', '%'.request()->get('class').'%');
+                        }
+
+                        if(!empty(request()-> get('gender')))
+                        {
+                            $return = $return->where('users.gender','=', request()->get('gender'));
+                        }
+
+                        if(!empty(request()->get('caste')))
+                        {
+                            $return = $return->where('users.caste','like', '%'.request()->get('caste').'%');
+                        }
+
+                        if(!empty(request()->get('religion')))
+                        {
+                            $return = $return->where('users.religion','like', '%'.request()->get('religion').'%');
+                        }
+
+                        if(!empty(request()->get('mobile_number')))
+                        {
+                            $return = $return->where('users.mobile_number','like', '%'.request()->get('mobile_number').'%');
+                        }
+
+                        if(!empty(request()->get('blood_group')))
+                        {
+                            $return = $return->where('users.blood_group','like', '%'.request()->get('blood_group').'%');
+                        }
+
+                        if(!empty(request()->get('admission_date')))
+                        {
+                            $return = $return->whereDate('users.admission_date','=', request()->get('admission_date'));
+                        }
+
+                        if(!empty(request()->get('date')))
+                        {
+                            $return = $return->whereDate('users.created_at','=', request()->get('date'));
+                        }
+
+                        if(!empty(request()->get('status')))
+                        {
+                            $status = (request()->get('status') == 100) ? 0 : 1;
+                            $return = $return->where('users.status','=', $status);
+                        }
+
+
+        $return = $return->orderBy('users.id', 'desc');
+
+            if(!empty($remove_pagination))
+            {
+                $return = $return->get();
+            }
+            else
+            {
+                $return = $return->paginate(40);
+            }
+                        
+
+        return $return;
+    }
     static public function getEmailSingle($email)
     {
         return self::where('email','=', $email) -> first();
@@ -79,4 +170,29 @@ class User extends Authenticatable
     {
         return self::find($id);
     }
+
+    public function getProfile()
+{
+    // Check if profile_pic is not empty and the file exists in the specified directory.
+    if (!empty($this->profile_pic) && file_exists('upload/profile/' . $this->profile_pic)) {
+        // If the file exists, return the full URL to the profile picture.
+        return url('upload/profile/' . $this->profile_pic);
+    } else {
+        // If no profile picture is set or the file doesn't exist, return an empty string.
+        return '';
+    }
+}
+
+    public function getProfileDirect()
+    {
+        if(!empty($this->profile_pic) && file_exists('upload/profile/'.$this->profile_pic))
+        {
+            return url('upload/profile/'.$this->profile_pic);
+        }
+        else
+        {
+            return url('upload/profile/user.jpg');
+        }
+    }
+
 }

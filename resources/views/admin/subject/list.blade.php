@@ -8,11 +8,11 @@
     <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-sm-6">
-        <h1>Class List(Total Class:{{$getRecord->total()}})</h1>
+        <h1>Subject List(Total Subject:{{$getRecord -> total()}})</h1>
         </div>
 
         <div class="col-sm-6" style="text-align: right">
-        <a href="{{url('admin/class/add')}}" class="btn btn-primary">Add New Class</a>
+        <a href="{{url('admin/subject/add')}}" class="btn btn-primary">Add New Subject</a>
         </div>
     </div>
     </div><!-- /.container-fluid -->
@@ -29,10 +29,9 @@
         <!-- Search header -->           
         <div class="card">
             <div class="card-header">
-            <h3 class="card-title"> Search Class</h3>
+            <h3 class="card-title"> Search Subject</h3>
             </div>
             <div class="card card-primary">
-                
                 <!-- form start -->
                 <form method="get" action="">
                 <div class="card-body">
@@ -41,16 +40,24 @@
                     <div class="form-group col-md-3">
                         <label>Name</label>
                         <input type="text" class="form-control" name ="name" value="{{Request::get('name')}}" placeholder="Name">
-                </div>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>Subject Type</label>
+                        <select class="form-control" name="type">
+                            <option value="Theory">Theory</option>
+                            <option value="Practical">Practical</option>
+                        </select>
+                    </div>
 
                 <div class="form-group col-md-3">
                     <label>Date</label>
-                    <input type="date" class="form-control" name="date" value="{{Request::get('date')}}"  placeholder="Date">
+                    <input type="date" class="form-control" name="date" value="{{Request::get('date')}}"  placeholder="Email">
                 </div>
 
                 <div class="form-group col-md-3">
                     <button class="btn btn-primary" type="submit" style="margin-top: 31px;"> Search</button>
-                    <a  href="{{url('admin/class/list')}}"  class="btn btn-success"  style="margin-top: 31px;">Clear</a>
+                    <a  href="{{url('admin/subject/list')}}"  class="btn btn-success"  style="margin-top: 31px;">Clear</a>
 
                 </div>
 
@@ -65,7 +72,7 @@
         <!-- /.card -->
         <div class="card">
             <div class="card-header">
-            <h3 class="card-title">Class List</h3>
+            <h3 class="card-title">Admin List</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
@@ -74,6 +81,7 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Status</th>
                     <th>Create By</th>
                     <th>Create Date</th>
@@ -81,44 +89,45 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach ($getRecord as $value )
-                        <tr>
-                            <td>{{$value -> id}}</td>
-                            <td>{{$value -> name}}</td>
-                            <td>
-                                @if ($value -> status ==0)
-                                Active
-                                @else
-                                Inactive
-                                @endif
-                            </td>
-                            <td>{{$value -> created_by_name}}</td>
-                            <td>{{date('d-m-Y H:i A', strtotime($value -> created_at))}}</td>
-                            <td>
-                                <a href="{{url('admin/class/edit/'.$value-> id)}}" class="btn btn-primary">Edit</a>
-                                <a href="{{url('admin/class/delete/'.$value-> id)}}" class="btn btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                    @endforeach
+                @foreach ($getRecord as $value )
+                <tr>
+                    <td>{{$value -> id}}</td>
+                    <td>{{$value -> name}}</td>
+                    <td>{{$value -> type}}</td>
+                    <td>
+                        @if ($value -> status ==0)
+                        Active
+                        @else
+                        Inactive
+                        @endif
+                    </td>
+                    <td>{{$value -> created_by_name}}</td>
+                    <td>{{date('d-m-Y H:i A', strtotime($value -> created_at))}}</td>
+                    <td>
+                    <a href="{{url('admin/subject/edit/'.$value-> id)}}" class="btn btn-primary">Edit</a>
+                    <a href="{{url('admin/subject/delete/'.$value-> id)}}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                @endforeach
                 </tbody>
-                </table>
-                <div style="padding: 10px; float: right;">
-                    {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
-                </div>
+            </table>
+            <div style="padding: 10px; float: right;">
+                {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
+            </div>
             
             </div>
             <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
+        </div>
+        <!-- /.card -->
         </div>
         <!-- /.col -->
-        </div>
-        <!-- /.row -->
-    
-        <!-- /.row -->
+    </div>
+    <!-- /.row -->
+
+    <!-- /.row -->
     </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+</section>
+<!-- /.content -->
 </div>
 
 @endsection

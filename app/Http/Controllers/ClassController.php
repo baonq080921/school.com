@@ -56,6 +56,10 @@ class ClassController extends Controller
 
     public function delete($id)
     {
+        //Find the user with id and delete from database
+        // $user = Class::findOrFail($id);
+        // $user -> delete();
+
         $save = ClassModel::getSingle($id);
         $save->is_delete = 1;
         $save -> save();
