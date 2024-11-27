@@ -157,6 +157,75 @@ class User extends Authenticatable
 
         return $return;
     }
+
+    static public function getParent($remove_pagination=0)
+    {
+        $return = self::select('users.*')
+                        ->where('user_type','=',4)
+                        ->where('is_delete','=',0);
+
+                        if(!empty(request()->get('name')))
+                        {
+                            $return = $return->where('users.name','like', '%'.request()->get('name').'%');
+                        }
+                        if(!empty(request()->get('last_name')))
+                        {
+                            $return = $return->where('users.last_name','like', '%'.request()->get('last_name').'%');
+                        }
+
+                        if(!empty(request()->get('email')))
+                        {
+                            $return = $return->where('users.email','like', '%'.request()->get('email').'%');
+                        }
+
+                        if(!empty(request()->get('gender')))
+                        {
+                            $return = $return->where('users.gender','=', request()->get('gender'));
+                        }
+
+                        if(!empty(request()->get('mobile_number')))
+                        {
+                            $return = $return->where('users.mobile_number','like', '%'.request()->get('mobile_number').'%');
+                        }
+
+                        if(!empty(request()->get('address')))
+                        {
+                            $return = $return->where('users.address','like', '%'.request()->get('address').'%');
+                        }
+
+                        if(!empty(request()->get('occupation')))
+                        {
+                            $return = $return->where('users.occupation','like', '%'.request()->get('occupation').'%');
+                        }
+
+
+                        if(!empty(request()->get('date')))
+                        {
+                            $return = $return->whereDate('users.created_at','=', request()->get('date'));
+                        }
+
+                        if(!empty(request()->get('status')))
+                        {
+                            $status = (request()->get('status') == 100) ? 0 : 1;
+                            $return = $return->whereDate('users.status','=', $status);
+                        }
+
+
+                    $return = $return->orderBy('id', 'desc');
+
+                    if(!empty($remove_pagination))
+                    {
+                        $return = $return->get();
+                    }
+                    else
+                    {
+                        $return = $return->paginate(40);
+                    }
+                        
+
+        return $return;
+    }
+
     static public function getEmailSingle($email)
     {
         return self::where('email','=', $email) -> first();
