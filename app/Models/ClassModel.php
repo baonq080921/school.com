@@ -14,7 +14,7 @@ class ClassModel extends Model
 
     static public function getSingle($id)
     {
-        return self::find($id);
+        return self::find(id: $id);
     }
 
     static public function getRecord()

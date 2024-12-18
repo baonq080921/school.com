@@ -21,7 +21,7 @@ use App\Http\Controllers\HomeworkController;
 use App\Http\Controllers\FeesCollectionController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomePageController;
-
+use App\Http\Controllers\CrouseDetail;
 
 
 
@@ -57,6 +57,8 @@ Route::prefix('school')->controller(HomePageController::class)->group(function (
     Route::get('home', [HomePageController::class, 'ShowHome']);
     Route::get('trainers', [HomePageController::class, 'ShowTrainer']);
     Route::get('crouses', [HomePageController::class, 'ShowCrouse']);
+    Route::get('details/{id}', [CrouseDetail::class, 'ShowCrouseDetails']);
+
 });
 
 

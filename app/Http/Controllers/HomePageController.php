@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ClassSubjectModel;
 use App\Models\User;
+use App\Models\ClassModel;
+
+
 
 class HomePageController extends Controller
 {
     public function ShowHome()
     {
-        $data['getRecord'] = ClassSubjectModel::getRecord();
+        $data['getClass'] = ClassModel::getClass();
         $data['getTotalStudent'] = User::getTotalUser(3);
         $data['getTotalTeacher'] = User::getTotalUser(2);
         $data['getTotalCrouse'] = ClassSubjectModel::getTotalCrouse();
@@ -29,6 +32,8 @@ class HomePageController extends Controller
     public function ShowCrouse()
     {
         $data['header_title'] = 'Crouses Page';
+        $data['getClass'] = ClassModel::getClass(); 
         return view('school.crouses',$data);
     }
+
 }
