@@ -620,4 +620,16 @@ class User extends Authenticatable
     }
 
 
+    static public function getRegister()
+    {
+        $return = self::select('users.*')
+                        ->where('user_type','=',3)
+                        ->where('is_student','=',1)
+                        ->where('is_delete','=',0)
+                        ->paginate(10);
+        return $return;
+    }
+    
+
+
 }
