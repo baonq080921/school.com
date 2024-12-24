@@ -10,7 +10,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Assign Class Teacher ({{ $getRecord->total() }})</h1>
+            <h1>Assign Class Teacher ({{$getRecord->total() }})</h1>
           </div>
           <div class="col-sm-6" style="text-align: right;">
               <a href="{{ url('admin/assign_class_teacher/add') }}" class="btn btn-primary">Add New Assign Class Teacher</a>
@@ -134,7 +134,7 @@
                   </tbody>
                 </table>
                  <div style="padding: 10px; float: right;">
-                   {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}  
+                   {{-- {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}   --}}
                 </div>
 
               </div>

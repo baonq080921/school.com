@@ -41,7 +41,7 @@
                     <label>Notice Date To</label>
                     <input type="date" class="form-control" name="notice_date_to" value="{{ Request::get('notice_date_to') }}"  >
                   </div>
-                  <div class="form-group col-md-3">
+                <div class="form-group col-md-3">
 
                     <button class="btn btn-primary" type="submit" style="margin-top: 30px;">Search</button>
                     <a href="{{ url('parent/my_student_notice_board') }}" class="btn btn-success" style="margin-top: 30px;">Reset</a>

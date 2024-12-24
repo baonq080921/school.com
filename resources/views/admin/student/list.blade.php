@@ -44,7 +44,6 @@
                 <div class="card-body">
                   <div class="row">
                     
-                  
                   <div class="form-group col-md-2">
                     <label>Name</label>
                     <input type="text" class="form-control" value="{{ Request::get('name') }}" name="name"  placeholder="Name">
@@ -151,10 +150,7 @@
               </form>
             </div>
           
-         
-         
-
-
+  
             @include('_message')
             
             <!-- /.card -->
@@ -162,24 +158,6 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Student List</h3>
-                <form action="{{ url('admin/student/export_excel') }}" method="post" style="float: right;">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="name" value="{{ Request::get('name') }}">
-                    <input type="hidden" name="last_name" value="{{ Request::get('last_name') }}">
-                    <input type="hidden" name="email" value="{{ Request::get('email') }}">
-                    <input type="hidden" name="admission_number" value="{{ Request::get('admission_number') }}">
-                    <input type="hidden" name="roll_number" value="{{ Request::get('roll_number') }}">
-                    <input type="hidden" name="gender" value="{{ Request::get('gender') }}">
-                    <input type="hidden" name="class" value="{{ Request::get('class') }}">
-                    <input type="hidden" name="caste" value="{{ Request::get('caste') }}">
-                    <input type="hidden" name="religion" value="{{ Request::get('religion') }}">
-                    <input type="hidden" name="mobile_number" value="{{ Request::get('mobile_number') }}">
-                    <input type="hidden" name="blood_group" value="{{ Request::get('blood_group') }}">
-                    <input type="hidden" name="status" value="{{ Request::get('status') }}">
-                    <input type="hidden" name="admission_date" value="{{ Request::get('admission_date') }}">
-                    <input type="hidden" name="date" value="{{ Request::get('date') }}">
-                    <button class="btn btn-primary">Export Excel</button>
-                </form>
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0" style="overflow: auto;">
@@ -248,7 +226,6 @@
                           <td style="min-width: 270px;">
                             <a href="{{ url('admin/student/edit/'.$value->id) }}" class="btn btn-primary btn-sm">Edit</a>
                             <a href="{{ url('admin/student/delete/'.$value->id) }}" class="btn btn-danger btn-sm">Delete</a>
-                            <a href="{{ url('chat?receiver_id='.base64_encode($value->id)) }}" class="btn btn-success btn-sm">Send Message</a>
                           </td>
                         </tr>
                       @endforeach

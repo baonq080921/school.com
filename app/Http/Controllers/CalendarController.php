@@ -8,9 +8,11 @@ use App\Models\WeekModel;
 use App\Models\ClassSubjectTimetableModel;
 use App\Models\ExamScheduleModel;
 use App\Models\AssignClassTeacherModel;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
-use Auth;
+
+
 class CalendarController extends Controller
 {
     public function MyCalendar()
@@ -103,15 +105,15 @@ class CalendarController extends Controller
         return view('parent.my_calendar', $data);
     }
 
-    // teacher side
-
+    //teacher side:
     public function MyCalendarTeacher()
     {
-        $teacher_id = Auth::user()->id;
-        $data['getClassTimetable'] = AssignClassTeacherModel::getCalendarTeacher($teacher_id);
-        $data['getExamTimetable'] = ExamScheduleModel::getExamTimetableTeacher($teacher_id);
+        $data['getClassTimetable'] = AssignClassTeacherModel::getCalendarTeacher(Auth::user()->id);
+        $data['getExamTimetable'] = ExamScheduleModel::getExamTimetableTeacher(Auth::user()->id);
         $data['header_title'] = "My Calendar";
-        return view('teacher.my_calendar', $data);
+        return view('teacher.my_calendar',$data);
     }
+
+    
 
 }

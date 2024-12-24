@@ -3,21 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
 use App\Models\ExamModel;
+use Illuminate\Support\Facades\Auth;
 use App\Models\ClassModel;
 use App\Models\ClassSubjectModel;
 use App\Models\ExamScheduleModel;
-use App\Models\MarksRegisterModel;
-use App\Models\AssignClassTeacherModel;
 use App\Models\User;
+use App\Models\MarksRegisterModel;
 use App\Models\MarksGradeModel;
 use App\Models\SettingModel;
-
-
-
-
-
+use App\Models\AssignClassTeacherModel;
 
 class ExaminationsController extends Controller
 {

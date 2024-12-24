@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ClassModel;
 use App\Models\User;
 use App\Models\AssignClassTeacherModel;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 
 class AssignClassTeacherController extends Controller
@@ -172,6 +172,17 @@ class AssignClassTeacherController extends Controller
         $data['getRecord'] = AssignClassTeacherModel::getMyClassSubject(Auth::user()->id);
         $data['header_title'] = "My Class & Subject";
         return view('teacher.my_class_subject', $data); 
+    }
+
+    static public function getMyClassSubjectGroup($teacher_id)
+    {
+        return AssignClassTeacherModel::select('assign_class_teacher.*', 'class.name as class_name',  'class.id as class_id')
+                    ->join('class', 'class.id', '=', 'assign_class_teacher.class_id')
+                    ->where('assign_class_teacher.is_delete', '=', 0)
+                    ->where('assign_class_teacher.status', '=', 0)
+                    ->where('assign_class_teacher.teacher_id', '=', $teacher_id)
+                    ->groupBy('assign_class_teacher.class_id')
+                    ->get();
     }
 
 }

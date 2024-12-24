@@ -4,21 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Exports\ExportTeacher;
-use Hash;
-use Auth;
-use Str;
-use Excel;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class TeacherController extends Controller
 {
-
-    public function export_excel(Request $request)
-    {
-        return Excel::download(new ExportTeacher, 'Teacher_'.date('d-m-Y').'.xls');        
-    }
-    
     public function list()
     {
         $data['getRecord'] = User::getTeacher();
@@ -26,11 +17,9 @@ class TeacherController extends Controller
         return view('admin.teacher.list',$data);
     }
 
-
-
     public function add()
-    {
-        $data['header_title'] = "Add New Teacher";
+    { 
+        $data['header_title'] = 'Add New Teacher';
         return view('admin.teacher.add',$data);
     }
 
@@ -107,7 +96,6 @@ class TeacherController extends Controller
             'marital_status' => 'max:50',                                       
         ]);
 
-
         $teacher = User::getSingle($id);
         $teacher->name = trim($request->name);
         $teacher->last_name = trim($request->last_name);
@@ -118,7 +106,7 @@ class TeacherController extends Controller
             $teacher->date_of_birth = trim($request->date_of_birth);    
         }
 
-          if(!empty($request->admission_date))
+        if(!empty($request->admission_date))
         {
             $teacher->admission_date = trim($request->admission_date);    
         }
@@ -155,19 +143,12 @@ class TeacherController extends Controller
 
     public function delete($id)
     {
-        $getRecord = User::getSingle($id);
-        if(!empty($getRecord))
-        {
-            $getRecord->is_delete = 1;
-            $getRecord->save();
-
-            return redirect()->back()->with('success', "Teacher Successfully Deleted");
-        }
-        else
-        {
-            abort(404);
-        }
+        //Find the user with id and delete from database
+        // $user = User::findOrFail($id);
+        // $user -> delete();
+        $user = User::getSingle($id);
+        $user -> is_delete = 1;
+        $user -> save();
+        return redirect('admin/teacher/list')-> with('success','Teacher successfully deleted');
     }
-
-
 }

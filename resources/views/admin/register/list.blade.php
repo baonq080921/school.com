@@ -12,11 +12,6 @@
           <div class="col-sm-6">
             <h1>Register Student List (Total : {{ $getRecord->total() }})</h1>
           </div>
-          <div class="col-sm-6" style="text-align: right;">
-              <a href="{{ url('admin/admin/add') }}" class="btn btn-primary">Add New Admin</a>
-          </div>
-
-         
           
         </div>
       </div><!-- /.container-fluid -->
@@ -89,6 +84,7 @@
                       <th>#</th>
                       <th>Name</th>
                       <th>Email</th>
+                      <th>Class</th>
                       <th>Created Date</th>
                       <th>Action</th>
                     </tr>
@@ -99,6 +95,7 @@
                           <td>{{ $value->id }}</td>
                           <td>{{ $value->name }}</td>
                           <td>{{ $value->email }}</td>
+                          <td>{{$value->class_name}}</td>
                           <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                           <td>
                             <a href="{{ url('admin/register/approve/'.$value->id) }}" class="btn btn-success">Approve</a>

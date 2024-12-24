@@ -14,7 +14,7 @@ class HomePageController extends Controller
     public function ShowHome()
     {
         $data['getClass'] = ClassModel::getClass();
-        $data['getTotalStudent'] = User::getTotalUser(3);
+        $data['getTotalStudent'] = User::getTotalStudent();
         $data['getTotalTeacher'] = User::getTotalUser(2);
         $data['getTotalCrouse'] = ClassSubjectModel::getTotalCrouse();
         $data['header_title'] = 'Home Page';

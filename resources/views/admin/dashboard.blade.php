@@ -18,32 +18,6 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>${{ number_format($getTotalFees, 2) }}</h3>
-                <p>All Time Received Payment</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="{{ url('admin/fees_collection/collect_fees_report') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-
-           <div class="col-lg-3 col-6">
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>${{ number_format($getTotalTodayFees, 2) }}</h3>
-                <p>Today Received Payment</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="{{ url('admin/fees_collection/collect_fees_report?start_created_date='.date('Y-m-d').'&end_created_date='.date('Y-m-d').'') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-   
           
           <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
@@ -134,7 +108,7 @@
           </div>
 
 
-           <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
               <div class="inner">
                 <h3>{{ $TotalSubject }}</h3>
@@ -147,10 +121,23 @@
               <a href="{{ url('admin/subject/list') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-         
-        </div>
-   
-       
+
+
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{ $TotalRegister }}</h3>
+
+                <p>Total Register</p>
+              </div>
+              <div class="icon">
+                <i class="nav-icon fas fa-table"></i>
+              </div>
+              <a href="{{ url('admin/register/list') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+        </div>    
       </div>
     </section>
   </div>

@@ -11,58 +11,11 @@ use App\Models\HomeworkSubmitModel;
 use App\Models\User;
 
 
-use Auth;
-use Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class HomeworkController extends Controller
 {
-    public function homework_report()
-    {
-        $data['getRecord'] = HomeworkSubmitModel::getHomeworkReport();
-        $data['header_title'] = 'Homework Report';
-        return view('admin.homework.report', $data);
-    }
-
-    public function homework()
-    {
-        $data['getRecord'] = HomeworkModel::getRecord();
-        $data['header_title'] = 'Homework';
-        return view('admin.homework.list', $data);
-    }
-
-
-    public function add()
-    {
-        $data['getClass'] = ClassModel::getClass();
-        $data['header_title'] = 'Add New Homework';
-        return view('admin.homework.add', $data);
-    }
-
-    public function insert(Request $request)
-    {
-        $homwork = new HomeworkModel;
-        $homwork->class_id = trim($request->class_id);
-        $homwork->subject_id = trim($request->subject_id);
-        $homwork->homework_date = trim($request->homework_date);
-        $homwork->submission_date = trim($request->submission_date);
-        $homwork->description = trim($request->description);
-        $homwork->created_by = Auth::user()->id;
-
-        if(!empty($request->file('document_file')))
-        {
-            $ext = $request->file('document_file')->getClientOriginalExtension();
-            $file = $request->file('document_file');   
-            $randomStr = date('Ymdhis').Str::random(20);
-            $filename = strtolower($randomStr).'.'.$ext;
-            $file->move('upload/homework/', $filename);
-            
-            $homwork->document_file = $filename;            
-        }
-
-        $homwork->save();
-
-        return redirect('admin/homework/homework')->with('success', "Homework successfully created");
-    }
 
     public function ajax_get_subject(Request $request)
     {
@@ -77,66 +30,6 @@ class HomeworkController extends Controller
 
         $json['success'] = $html;
         echo json_encode($json);
-    }
-
-    public function edit($id)
-    {
-        $getRecord = HomeworkModel::getSingle($id);
-        $data['getRecord'] = $getRecord;
-        $data['getSubject'] = ClassSubjectModel::MySubject($getRecord->class_id);
-        $data['getClass'] = ClassModel::getClass();
-        $data['header_title'] = 'Edit Homework';
-        return view('admin.homework.edit', $data);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $homwork = HomeworkModel::getSingle($id);;
-        $homwork->class_id = trim($request->class_id);
-        $homwork->subject_id = trim($request->subject_id);
-        $homwork->homework_date = trim($request->homework_date);
-        $homwork->submission_date = trim($request->submission_date);
-        $homwork->description = trim($request->description);
-
-        if(!empty($request->file('document_file')))
-        {
-            $ext = $request->file('document_file')->getClientOriginalExtension();
-            $file = $request->file('document_file');   
-            $randomStr = date('Ymdhis').Str::random(20);
-            $filename = strtolower($randomStr).'.'.$ext;
-            $file->move('upload/homework/', $filename);
-            
-            $homwork->document_file = $filename;            
-        }
-
-        $homwork->save();
-
-        return redirect('admin/homework/homework')->with('success', "Homework successfully updated");
-    }
-
-    public function delete($id)
-    {
-        $homwork = HomeworkModel::getSingle($id);
-        $homwork->is_delete = 1;
-        $homwork->save();
-
-        return redirect()->back()->with('success', "Homework successfully deleted");
-    }
-
-    public function submitted($homework_id)
-    {
-        $homwork = HomeworkModel::getSingle($homework_id);
-        if(!empty($homwork))
-        {
-            $data['homework_id'] = $homework_id;
-            $data['getRecord'] = HomeworkSubmitModel::getRecord($homework_id);
-            $data['header_title'] = 'Submitted Homework';
-            return view('admin.homework.submitted', $data);
-        }
-        else
-        {
-            abort(404);
-        }
     }
 
     // teacher side
@@ -154,7 +47,6 @@ class HomeworkController extends Controller
         $data['header_title'] = 'Homework';
         return view('teacher.homework.list', $data);
     }
-
 
     public function addTeacher()
     {
@@ -225,6 +117,16 @@ class HomeworkController extends Controller
         return redirect('teacher/homework/homework')->with('success', "Homework successfully updated");
     }
 
+    public function delete($id)
+    {
+        $homwork = HomeworkModel::getSingle($id);
+        $homwork->is_delete = 1;
+        $homwork->save();
+        // $homwork->delete();
+
+        return redirect()->back()->with('success', "Homework successfully deleted");
+    }
+
     public function submittedTeacher($homework_id)
     {
         $homwork = HomeworkModel::getSingle($homework_id);
@@ -243,7 +145,6 @@ class HomeworkController extends Controller
 
 
     // student side work
-
     public function HomeworkStudent()
     {
         $data['getRecord'] = HomeworkModel::getRecordStudent(Auth::user()->class_id, Auth::user()->id);
@@ -290,9 +191,6 @@ class HomeworkController extends Controller
     }
 
     // parent side work 
-
-
-
     public function HomeworkStudentParent($student_id)
     {
         $getStudent = User::getSingle($student_id);
@@ -311,8 +209,5 @@ class HomeworkController extends Controller
         $data['getStudent'] = $getStudent;
         return view('parent.homework.submitted_list', $data);
     }
-
-    
-    
     
 }

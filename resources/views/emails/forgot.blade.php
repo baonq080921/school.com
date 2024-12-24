@@ -1,14 +1,14 @@
 @component('mail::message')
-Hello {{$user->name}},
+# Xin chào {{$user->name}}
 
-<p>We understand it happens. </p>
+Chúng tôi hiểu chuyện xảy ra và muốn giúp bạn khôi phục lại mật khẩu của mình.
 
 @component('mail::button', ['url' => url('reset/'.$user->remember_token)])
-Reset Your Password
+    Đặt lại mật khẩu của bạn
 @endcomponent
 
-<p>In case you have any issues recovering your password, please contact us. </p>
+Nếu bạn gặp bất kỳ vấn đề gì, vui lòng [liên lạc với chúng tôi](mailto:bao992001pth@gmail.com).
 
-Thanks,<br>
+Cảm ơn,<br>
 {{ config('app.name') }}
 @endcomponent

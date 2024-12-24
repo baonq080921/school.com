@@ -11,11 +11,10 @@ class NoticeBoardModel extends Model
 
     protected $table = 'notice_board';
 
-    static public function getSingle($id)
-    {
+
+    static public function getSingle($id){
         return self::find($id);
     }
-
     static public function getRecord()
     {
         $return = self::select('notice_board.*', 'users.name as created_by_name')
@@ -63,6 +62,7 @@ class NoticeBoardModel extends Model
         return $return;
     }
 
+
     static public function getRecordUser($message_to)
     {
         $return = NoticeBoardModel::select('notice_board.*', 'users.name as created_by_name')
@@ -92,7 +92,6 @@ class NoticeBoardModel extends Model
         return $return;
     }
 
-
     static public function getRecordUserCount($message_to)
     {
         $return = NoticeBoardModel::select('notice_board.id')
@@ -105,6 +104,7 @@ class NoticeBoardModel extends Model
         return $return;
     }
 
+
     public function getMessage()
     {
         return $this->hasMany(NoticeBoardMessageModel::class, "notice_board_id");
@@ -114,6 +114,4 @@ class NoticeBoardModel extends Model
     {
         return NoticeBoardMessageModel::where('notice_board_id', '=', $notice_board_id)->where('message_to', '=', $message_to)->first();
     }
-
-    
 }

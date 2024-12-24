@@ -39,7 +39,7 @@
                     <input type="password" class="form-control" name="password" required placeholder="Password">
                   </div>
 
-                   <div class="form-group">
+                  <div class="form-group">
                     <label>Profile Pic <span style="color: red;"></span></label>
                     <input type="file" class="form-control" name="profile_pic" >
                     <div style="color:red">{{ $errors->first('profile_pic') }}</div>

@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Hash;
-use Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -43,7 +44,7 @@ class AdminController extends Controller
             $filename = strtolower($randomStr).'.'.$ext;
             $file->move('upload/profile/', $filename);
             
-            $user->profile_pic = $filename;            
+            $user->profile_pic = $filename;                        
         }   
 
         $user->save();

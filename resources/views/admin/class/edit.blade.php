@@ -22,7 +22,7 @@
           <!-- left column -->
           <div class="col-md-12">
             <div class="card card-primary">
-              <form method="post" action="">
+              <form method="post" action=""  enctype="multipart/form-data">
                  {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
@@ -36,13 +36,23 @@
                   </div>
 
                   <div class="form-group">
-                    <label>Status</label>
-                    <select class="form-control" name="status">
-                        <option {{ ($getRecord->status == 0) ? 'selected' : '' }} value="0">Active</option>
-                        <option {{ ($getRecord->status == 1) ? 'selected' : '' }} value="1">Inactive</option>
-                    </select>
-                    
-                  </div>
+                    <label>Class Pic <span style="color: red;"></span></label>
+                    <input type="file" class="form-control" name="profile_pic" >
+                    <div style="color:red">{{ $errors->first('profile_pic') }}</div>
+                    @if(!empty($getRecord->getProfile()))
+                    <img src="{{  $getRecord->getProfile() }}" style="width: auto;height: 50px;"> 
+                    @endif
+                </div> 
+
+                <div class="form-group">
+                  <label>Status</label>
+                  <select class="form-control" name="status">
+                      <option value="0">Active</option>
+                      <option value="1">Inactive</option>
+                  </select>
+                  
+                </div>
+
               
                 
                 </div>

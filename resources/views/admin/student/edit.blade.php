@@ -161,7 +161,7 @@
                   <div class="form-group">
                     <label>Password <span style="color: red;"></span></label>
                     <input type="text" class="form-control" name="password"  placeholder="Password">
-                    <p>Due you want to change password so Please add new password</p>
+                    <p>Do you want to change password so Please add new password</p>
                   </div>
                
                 
